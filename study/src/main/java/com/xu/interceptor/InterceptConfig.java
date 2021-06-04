@@ -1,7 +1,5 @@
-package com.xu.config;
+package com.xu.interceptor;
 
-import com.xu.service.MyIntercept;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -9,16 +7,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 /**
  * @Author: canjin
  * @Date: 2021/3/30
- * 说明:
+ * 说明: 注册拦截器的类
  */
 @Configuration
 public class InterceptConfig extends WebMvcConfigurationSupport{
 
-    @Autowired
-    private MyIntercept intercept;
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(intercept);
+        registry.addInterceptor(new MyInterceptor());
+        System.out.println("注册拦截器成功！");
         super.addInterceptors(registry);
     }
 }

@@ -2,8 +2,10 @@ package com.xu.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Author: canjin
@@ -12,8 +14,9 @@ import java.util.stream.Collectors;
  */
 public class ListTest {
     public static void main(String[] args) {
-        listTest1();
-        test2();
+        //listTest1();
+        //test2();
+        sort();
     }
 
     public static void listTest1(){
@@ -66,5 +69,20 @@ public class ListTest {
         String collect = Arrays.stream(arry).collect(Collectors.joining());
         Arrays.stream(arry).collect(Collectors.toList());
 
+    }
+
+    private static void sort(){
+        List<String> names = Arrays.asList("peterF", "anna", "mike", "xenia","33");
+        Stream<String> stream = names.stream().filter(s -> s.equals("anna"));
+        //将stream变为list
+        List<String> list = stream.collect(Collectors.toList());
+
+        List<String> list2=new ArrayList<>();
+        names.stream().forEach(name->{
+            if(!name.equals("mike")){
+                list2.add(name);
+            }
+        });
+        System.out.println(list2.toString());
     }
 }

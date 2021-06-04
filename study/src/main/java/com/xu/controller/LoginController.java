@@ -1,15 +1,18 @@
 package com.xu.controller;
 
 import com.xu.bean.User;
+import com.xu.cache.Mycache;
 import com.xu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @Author: canjin
@@ -34,4 +37,15 @@ public class LoginController {
         return "login/index";
     }
 
+    @GetMapping("/cache1")
+    public String cache1(){
+        Map<String, Object> map = Mycache.map;
+        if(map.containsKey("list")){
+            System.out.println(map.get("list"));
+        }
+        if(map.containsKey("1")){
+            System.out.println(map.get("1"));
+        }
+        return "";
+    }
 }
