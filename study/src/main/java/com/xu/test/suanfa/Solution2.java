@@ -12,7 +12,7 @@ import java.util.List;
 public class Solution2 {
     public static void main(String[] args) {
 
-       /* int i = removeDuplicates(new int[]{1, 2, 2, 3, 3, 4, 5,6});
+        /*int i = removeDuplicates(new int[]{1, 2, 2, 3, 4, 5,6});
         System.out.println(i);*/
         //System.out.println(bf(100));
 
@@ -20,11 +20,11 @@ public class Solution2 {
         System.out.println(reverseString("abcd"));
         //System.out.println(reverse(322));
         //System.out.println(min(new int[]{1,2,4,6}));
-        System.out.println(GetLeastNumbers_Solution(new int[]{1,2,8,6,7},3));
+        //System.out.println(GetLeastNumbers_Solution(new int[]{1,2,8,6,7},3));
 
     }
 
-    //删除排序数组中的重复项
+    //删除排序数组中的重复项,返回去重数组的长度
     //双指针算法
     //数组完成排序后，我们使用2个指针i和j，i是慢指针，j是快指针。
     // 只要num[i]=num[j],我们就增加j以跳过重复项。当遇到num[i]!=num[j]时，跳过重复项的运行已经结束，
@@ -83,6 +83,7 @@ public class Solution2 {
         return count;
     }
 
+    //字符串反转
     public static String reverseString(String str){
         char[] chars = str.toCharArray();
         int length=str.length();
