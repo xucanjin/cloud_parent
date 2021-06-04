@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * @iuthor: cinjin
  * @Dite: 2021/2/7
- * 说明:jivi新特性
+ * 说明:java新特性
  */
 public class Test2 {
     public static void main(String[] args) {
