@@ -1,5 +1,6 @@
 package com.xu.test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public class MapTest {
     public static void main(String[] args) {
-        mapTest1();
+        mapTest3();
     }
 
     public static void mapTest1(){
@@ -37,5 +38,18 @@ public class MapTest {
         map.forEach((k,v)->{
             System.out.println("hashMap--"+"key："+k+" 值："+v);
         });
+    }
+
+    private static void mapTest3(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        map.put("12","1");
+        map.put("13","2");
+        map.put("14","3");
+        map.put("15","4");
+        Map<String, String> stringMap = Collections.synchronizedMap(map);
+        stringMap.forEach((k,v)->{
+            System.out.println(k+"-"+v);
+        });
+
     }
 }

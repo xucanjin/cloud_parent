@@ -1,6 +1,6 @@
-package com.xu.service;
+package com.xu.interceptor;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: canjin
- * @Date: 2021/3/30
- * 说明:自定义拦截器
+ * @Date: 2021/6/1
+ * 说明:创建一个拦截器
  */
-@Service
-public class MyIntercept implements HandlerInterceptor{
+@Component
+public class MyInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestURI = request.getRequestURI();
-        System.out.println("拦截启动！");
+        String servletPath = request.getServletPath();
+        System.out.println(servletPath);
         return true;
     }
 
