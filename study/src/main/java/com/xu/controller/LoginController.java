@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @GetMapping("/cache1")
-    public String cache1(){
+    public void cache1(){
         Map<String, Object> map = Mycache.map;
         if(map.containsKey("list")){
             System.out.println(map.get("list"));
@@ -46,6 +46,5 @@ public class LoginController {
         if(map.containsKey("1")){
             System.out.println(map.get("1"));
         }
-        return "";
     }
 }

@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @SpringBootApplication  表示这是一个SpringBoot应用
@@ -14,7 +15,8 @@ import org.springframework.context.ApplicationContext;
 //@EnableEurekaClient
 //指定要扫描的Mapper类的包的路径
 @MapperScan("com.xu.mapper")
-@EnableDubbo
+//@EnableDubbo
+@EnableAsync
 public class StudyApplication {
 
 	public static void main(String[] args) {
