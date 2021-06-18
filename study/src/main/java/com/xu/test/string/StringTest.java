@@ -1,4 +1,4 @@
-package com.xu.test;
+package com.xu.test.string;
 
 
 import com.alibaba.fastjson.JSONObject;
