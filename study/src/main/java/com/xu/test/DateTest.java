@@ -26,6 +26,9 @@ public class DateTest {
         System.out.println(DateUtil.getDateBydays(-1));
         System.out.println(DateUtil.getDateBydays(1));
         System.out.println(DateUtil.getTimeByMinutes2(-30));
+
+        //date和pattern的格式必须一致
+        System.out.println(DateUtil.dateCompare(-30,"2021-05-10","yyyy-MM-dd"));
     }
 
 }

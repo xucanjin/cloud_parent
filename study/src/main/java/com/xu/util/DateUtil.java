@@ -1,9 +1,13 @@
 package com.xu.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @Author: canjin
@@ -67,7 +71,7 @@ public class DateUtil {
      * @param time yyyy-MM-dd HH:mm:ss
      * @return
      */
-    public static boolean dateCompare(String time){
+    public static boolean dateTimeCompare(String time){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localTime=LocalDateTime.parse(time,dtf);
         return LocalDateTime.now().isAfter(localTime);
@@ -121,5 +125,39 @@ public class DateUtil {
     public static String getTimeByMinutes2(long minutes){
         LocalTime localTime=LocalTime.now().plusMinutes(minutes);
         return localTime.format(formatter3);
+    }
+
+    /**
+     * 判断某个日期是否小于当前日期减去某天数
+     * @param days
+     * @param date yyyyMmdd 或yyyy-MM-dd 和pattern必须一致
+     * @param pattern yyyyMmdd 或yyyy-MM-dd
+     * @return
+     */
+    public static boolean dateCompare(long days,String date,String pattern){
+        LocalDate localDate=LocalDate.now().plusDays(days);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
+        if(LocalDate.parse(date,dtf).isBefore(localDate)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * jdk7 判断某个日期是否小于当前日期减去天数
+     * @param currentDate 传入的日期字符串
+     * @param pattern  currentDate的格式
+     */
+    public static boolean dateIsBefore(String currentDate,int days,String pattern) {
+        Calendar now = Calendar.getInstance();
+        now.setTime(new Date());
+        now.add(Calendar.DAY_OF_YEAR, days);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        //当前日期减去一定天数后的日期
+        String date = simpleDateFormat.format(now.getTime());
+        if (currentDate.compareTo(date) < 0) {
+            return true;
+        }
+        return false;
     }
 }
