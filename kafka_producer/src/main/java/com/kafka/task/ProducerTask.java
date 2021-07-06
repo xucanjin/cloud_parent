@@ -1,6 +1,7 @@
 package com.kafka.task;
 
 import com.kafka.producer.KafkaProducerDemo;
+import com.kafka.producer.KafkaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class ProducerTask {
     private static Logger log=LoggerFactory.getLogger(ProducerTask.class);
 
     @Autowired
-    private KafkaProducerDemo kafkaProducerDemo;
+    private KafkaService kafkaService;
     @Scheduled(cron="${com.kafka.produce}")
     public void poducer(){
-        kafkaProducerDemo.test();
+        kafkaService.test();
     }
 }

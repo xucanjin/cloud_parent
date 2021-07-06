@@ -17,6 +17,8 @@
         <module>shopping</module>
         <module>swagger</module>
         <module>dubbo_consumer</module>
+        <module>kafka_producer</module>
+        <module>kafka_consumer</module>
     </modules>
 
     <parent>
