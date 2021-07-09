@@ -1,5 +1,6 @@
 package com.xu.config;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,14 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisConfig {
 
     /**
-     * 分页插件
+     * 分页拦截器
      */
     @Bean
     public PaginationInnerInterceptor paginationInnerInterceptor(){
-        return new PaginationInnerInterceptor();
+        PaginationInnerInterceptor innerInterceptor=new PaginationInnerInterceptor();
+        //设置数据类型
+        innerInterceptor.setDbType(DbType.MYSQL);
+        return innerInterceptor;
     }
 }
 

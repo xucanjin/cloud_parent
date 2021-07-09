@@ -1,10 +1,8 @@
 package com.xu;
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -14,7 +12,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 //@EnableEurekaClient
 //指定要扫描的Mapper类的包的路径
-@MapperScan("com.xu.mapper")
+//basePackages 可以配置多个路径
+@MapperScan(basePackages = {"com.xu.mapper"})
 //@EnableDubbo
 @EnableAsync
 public class StudyApplication {

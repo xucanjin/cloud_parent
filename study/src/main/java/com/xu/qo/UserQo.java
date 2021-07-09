@@ -1,21 +1,13 @@
-package com.xu.bean;
+package com.xu.qo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
 
 /**
  * @Author: canjin
  * @Date: 2021/3/9
  * 说明:
  */
+public class UserQo {
 
-@TableName("user")
-public class User implements Serializable{
-
-    @TableId(type= IdType.AUTO)
     private Integer id;
     private Integer age;
     private String name;
@@ -44,11 +36,4 @@ public class User implements Serializable{
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "age=" + age +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
