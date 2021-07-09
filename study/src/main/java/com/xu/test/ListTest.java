@@ -30,7 +30,9 @@ public class ListTest {
         list.add("list");
         list.add("love");
         list.add("clear");
+        for(String s:list){
 
+        }
         //输出c开头的字符串,并按ASCII码表的大小进行排序
         list.stream().filter(item->item.startsWith("c")).sorted((s1,s2)->s1.compareTo(s2))
                 .forEach(System.out::println);
