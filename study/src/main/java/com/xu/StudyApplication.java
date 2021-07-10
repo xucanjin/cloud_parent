@@ -3,6 +3,7 @@ package com.xu;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @MapperScan(basePackages = {"com.xu.mapper"})
 //@EnableDubbo
 @EnableAsync
+//@EnableElasticsearchRepositories(basePackages = "com.xu.elasticsearch.mapper")
 public class StudyApplication {
 
 	public static void main(String[] args) {
