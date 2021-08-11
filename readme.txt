@@ -11,3 +11,14 @@ study\src\main\java\com\xu\config\GeneratorCodeConfig.java
 
 --pdf导出
 study\src\main\java\com\xu\util\PdfUtil.java
+
+--2021.08.11 分布式事务
+依赖：
+ <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+      <version>2.1.0.RELEASE</version>
+ </dependency>
+
+seata数据源配置类：
+study\src\main\java\com\xu\seata\SeataDataSourceProxy.java
