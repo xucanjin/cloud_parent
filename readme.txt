@@ -22,3 +22,5 @@ study\src\main\java\com\xu\util\PdfUtil.java
 
 seata数据源配置类：
 study\src\main\java\com\xu\seata\SeataDataSourceProxy.java
+
+在需要实现分布式事务的方法上添加@GlobalTransactional

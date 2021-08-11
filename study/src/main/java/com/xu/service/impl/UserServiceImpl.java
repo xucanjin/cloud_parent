@@ -7,6 +7,8 @@ import com.xu.bean.User;
 import com.xu.mapper.UserMapper;
 import com.xu.qo.UserQo;
 import com.xu.service.UserService;
+import com.xu.util.RespResult;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +69,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         queryWrapper.like("name",userQo.getName());
 
         return userMapper.selectPage(new Page<User>(current,size),queryWrapper);
+    }
+
+    //分布式事务的注解
+    @GlobalTransactional
+    public void add(User user){
+        userMapper.insert(user);
     }
 }
