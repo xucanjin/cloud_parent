@@ -24,3 +24,13 @@ seata数据源配置类：
 study\src\main\java\com\xu\seata\SeataDataSourceProxy.java
 
 在需要实现分布式事务的方法上添加@GlobalTransactional
+
+--2021.08.12
+rocketmq生产者发送half消息：
+rocketMQ_producer\src\main\java\com\xu\mq\controller\RocketSendController.java
+
+rocketmq生产者half消息发送成功的监听：
+rocketMQ_producer\src\main\java\com\xu\mq\listener\TransactionListener.java
+
+rocketmq消费者端的监听：
+study\src\main\java\com\xu\mq\listener\RocketMqListener.java

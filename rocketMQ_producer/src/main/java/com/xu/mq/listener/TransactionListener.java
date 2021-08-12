@@ -31,13 +31,14 @@ public class TransactionListener implements RocketMQLocalTransactionListener{
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         try {
-            //========================本地事务控制===================
+            //================本地事务操作开始=====================================
             //消息
             String result = new String((byte[]) msg.getPayload(),"UTF-8");
             PayLog payLog = JSON.parseObject(result,PayLog.class);
             payLogService.add(payLog);
-            //========================本地事务控制===================
+            //================本地事务操作结束=====================================
         } catch (Exception e) {
+            //异常,消息回滚
             e.printStackTrace();
             return RocketMQLocalTransactionState.ROLLBACK;
         }

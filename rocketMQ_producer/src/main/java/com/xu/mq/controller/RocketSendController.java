@@ -39,6 +39,7 @@ public class RocketSendController {
         Message<String> message = MessageBuilder.withPayload(JSON.toJSONString(payLog)).build();
 
         //sendMessageInTransaction 发送事务消息
+        //log是topic的名字
         rocketMQTemplate.sendMessageInTransaction("log",message,null);
 
         return null;

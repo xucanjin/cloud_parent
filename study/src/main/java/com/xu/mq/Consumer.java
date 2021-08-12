@@ -1,7 +1,9 @@
 package com.xu.mq;
 
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.apache.rocketmq.spring.core.RocketMQPushConsumerLifecycleListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,10 +13,16 @@ import org.springframework.stereotype.Component;
  */
 //@Component
 @RocketMQMessageListener(topic = "Topic1", consumerGroup = "consumer-demo1")
-public class Consumer implements RocketMQListener<String>{
+public class Consumer implements RocketMQListener,RocketMQPushConsumerLifecycleListener{
+
 
     @Override
-    public void onMessage(String s) {
-        System.out.println("收到："+s);
+    public void onMessage(Object object) {
+
+    }
+
+    @Override
+    public void prepareStart(DefaultMQPushConsumer consumer) {
+
     }
 }
