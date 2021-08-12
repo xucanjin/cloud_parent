@@ -34,3 +34,7 @@ rocketMQ_producer\src\main\java\com\xu\mq\listener\TransactionListener.java
 
 rocketmq消费者端的监听：
 study\src\main\java\com\xu\mq\listener\RocketMqListener.java
+
+--Base64和AES工具类
+study\src\main\java\com\xu\util\AESUtil.java
+study\src\main\java\com\xu\util\Base64Util.java

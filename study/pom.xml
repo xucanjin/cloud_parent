@@ -156,6 +156,13 @@
             <version>2.1.0.RELEASE</version>
         </dependency>
 
+        <!--算法依赖包-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.46</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
