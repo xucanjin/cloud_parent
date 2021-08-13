@@ -41,3 +41,6 @@ study\src\main\java\com\xu\util\Base64Util.java
 
 --得到微信支付的二维码
 study\src\main\java\com\xu\wxpay\service\impl\WeixinPayServiceImpl.java
+
+--支付安全处理工具类：解密、验签
+study\src\main\java\com\xu\util\Signature.java

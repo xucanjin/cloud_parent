@@ -65,8 +65,8 @@ public class WeixinPayServiceImpl implements WeixinPayService {
 
             //不可逆转的支付状态，记录日志
             if(status==2 || status==3 || status==4 || status==5 || status==7){
-                payLog = new PayLog(outno,status, JSON.toJSONString(resp),outno,new Date());
-                payLogMapper.insert(payLog);
+                /*payLog = new PayLog(outno,status, JSON.toJSONString(resp),outno,new Date());
+                payLogMapper.insert(payLog);*/
             }
         }
         return "";
