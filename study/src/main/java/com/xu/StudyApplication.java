@@ -1,8 +1,11 @@
 package com.xu;
 
+import com.github.wxpay.sdk.WXPay;
+import com.xu.wxpay.config.WeixinPayConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -22,5 +25,10 @@ public class StudyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StudyApplication.class, args);
+	}
+
+	@Bean
+	public WXPay wxPay() throws Exception {
+		return new WXPay(new WeixinPayConfig());
 	}
 }

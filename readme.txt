@@ -38,3 +38,6 @@ study\src\main\java\com\xu\mq\listener\RocketMqListener.java
 --Base64和AES工具类
 study\src\main\java\com\xu\util\AESUtil.java
 study\src\main\java\com\xu\util\Base64Util.java
+
+--得到微信支付的二维码
+study\src\main\java\com\xu\wxpay\service\impl\WeixinPayServiceImpl.java

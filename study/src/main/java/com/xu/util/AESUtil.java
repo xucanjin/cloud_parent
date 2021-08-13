@@ -31,6 +31,7 @@ public class AESUtil {
         //3:设置加密模式（无论是加密还是解析，模式一致）
         // 1): AES/ECB/KPS7Padding 设置算法
         // 2):指定算法库对象
+        // BC是BouncyCastleProvider类的PROVIDER_NAME指定的
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding","BC");
         //4:初始化加密配置
         cipher.init(mode,secretKeySpec);

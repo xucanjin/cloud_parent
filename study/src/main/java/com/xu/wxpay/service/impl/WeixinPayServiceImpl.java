@@ -1,9 +1,10 @@
-package com.xu.mq.service.impl;
+package com.xu.wxpay.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.xu.mq.PayLog;
-import com.xu.mq.mapper.PayLogMapper;
-import com.xu.mq.service.WeixinPayService;
+import com.github.wxpay.sdk.WXPay;
+import com.xu.bean.PayLog;
+import com.xu.mapper.PayLogMapper;
+import com.xu.wxpay.service.WeixinPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +15,20 @@ import java.util.Map;
 @Service
 public class WeixinPayServiceImpl implements WeixinPayService {
 
-    //@Autowired
-    //private WXPay wxPay;
+    @Autowired
+    private WXPay wxPay;
 
     @Autowired
     private PayLogMapper payLogMapper;
-
     /****
      * 申请退款
      * @param dataMap
      * @return
      */
-    /*@Override
+    @Override
     public Map<String, String> refund(Map<String, String> dataMap) throws Exception {
         return wxPay.refund(dataMap);
-    }*/
+    }
 
     /****
      * 预支付下单操作（获取支付二维码扫码地址）
@@ -36,10 +36,10 @@ public class WeixinPayServiceImpl implements WeixinPayService {
      * @return
      * @throws Exception
      */
-    /*@Override
+    @Override
     public Map<String, String> preOrder(Map<String, String> dataMap) throws Exception {
         return wxPay.unifiedOrder(dataMap);
-    }*/
+    }
 
 
     /****
@@ -49,7 +49,7 @@ public class WeixinPayServiceImpl implements WeixinPayService {
      * @throws Exception
      */
     @Override
-    public PayLog result(String outno) throws Exception {
+    public String result(String outno) throws Exception {
         //查询数据库中支付日志
         PayLog payLog = payLogMapper.selectById(outno);
 
@@ -57,7 +57,7 @@ public class WeixinPayServiceImpl implements WeixinPayService {
             //数据库中没有数据查询微信支付服务
             Map<String, String> data = new HashMap<String, String>();
             data.put("out_trade_no",outno);
-           /* Map<String, String> resp = wxPay.orderQuery(data);
+            Map<String, String> resp = wxPay.orderQuery(data);
             //把支付结果存入数据库中（不可逆转支付结果）
             //return_code result_code  trade_state
             String tradeState = resp.get("trade_state");
@@ -67,9 +67,9 @@ public class WeixinPayServiceImpl implements WeixinPayService {
             if(status==2 || status==3 || status==4 || status==5 || status==7){
                 payLog = new PayLog(outno,status, JSON.toJSONString(resp),outno,new Date());
                 payLogMapper.insert(payLog);
-            }*/
+            }
         }
-        return payLog;
+        return "";
     }
 
     /***

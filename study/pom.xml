@@ -163,6 +163,13 @@
             <version>1.46</version>
         </dependency>
 
+        <!--微信支付SDK-->
+        <dependency>
+            <groupId>com.github.wxpay</groupId>
+            <artifactId>wxpay-sdk</artifactId>
+            <version>3.0.9</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
