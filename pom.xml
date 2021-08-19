@@ -19,6 +19,7 @@
         <module>dubbo_consumer</module>
         <module>kafka_producer</module>
         <module>kafka_consumer</module>
+        <module>nginx01</module>
     </modules>
 
     <parent>

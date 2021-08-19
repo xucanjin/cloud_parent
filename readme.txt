@@ -44,3 +44,21 @@ study\src\main\java\com\xu\wxpay\service\impl\WeixinPayServiceImpl.java
 
 --支付安全处理工具类：解密、验签
 study\src\main\java\com\xu\util\Signature.java
+
+--2021.08.19 nginx配置
+upstream canjin{
+		#配置要负载的服务器
+		server 127.0.0.1:8087 weight=1;
+	}
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+			proxy_pass http://canjin/;
+        }
+    }
+访问localhost/get即访问http://127.0.0.1:8087/get
