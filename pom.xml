@@ -20,6 +20,7 @@
         <module>kafka_producer</module>
         <module>kafka_consumer</module>
         <module>nginx01</module>
+        <module>study02</module>
     </modules>
 
     <parent>
