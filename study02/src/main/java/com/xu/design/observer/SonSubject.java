@@ -11,9 +11,9 @@ public class SonSubject extends Subject {
 
     @Override
     public void notifyObserver(String str) {
-        System.out.println("通知观察者");
-
-        for (Observer observer : observerList) {
+/* 2 */       System.out.println("通知观察者");
+/* 3 */
+/* 4 */       for (Observer observer : observerList) {
             observer.response(str);
         }
     }
