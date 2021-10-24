@@ -1,6 +1,6 @@
 package com.xu.factory;
 
-import com.xu.fanshe.User;
+import com.xu.model.User;
 import org.springframework.beans.factory.FactoryBean;
 
 /**

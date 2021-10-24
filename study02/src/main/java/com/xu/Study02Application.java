@@ -1,5 +1,7 @@
 package com.xu;
 
+import com.xu.compo.CreateSupplier;
+import com.xu.utils.SpringBeanUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,5 +14,8 @@ public class Study02Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Study02Application.class, args);
+
+		CreateSupplier bean= (CreateSupplier) SpringBeanUtil.getBean("createSupplier");
+
 	}
 }
