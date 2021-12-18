@@ -18,22 +18,25 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
-
     @Autowired
     private CacheUtil cacheUtil;
 
     @RequestMapping("name")
-    public String test(@RequestParam(value = "name",required = false) String[] name){
-
+    public String test(@RequestParam(value = "name", required = false) String[] name) {
         System.out.println(name);
         return "";
     }
 
-    @RequestMapping("test")
-    public String test(){
+    @RequestMapping("cache1")
+    public String cache1() {
         List<String> list = cacheUtil.getList();
         String s = JSONUtil.toJsonStr(list);
-        System.out.println(s);
-        return "";
+        return s;
+    }
+
+    @RequestMapping("cache2")
+    public String cache2() {
+        String s = JSONUtil.toJsonStr(CacheUtil.LIST);
+        return s;
     }
 }
