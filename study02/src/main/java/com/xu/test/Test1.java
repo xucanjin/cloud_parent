@@ -1,19 +1,18 @@
 package com.xu.test;
 
-import com.xu.fanshe.User;
-
 import java.util.ArrayList;
 
 /**
- * @Author: canjin
- * @Date: 2021/10/10
- * @Description:
+ * @author canjin
+ * @date 2021/10/10
+ * @description
  */
 public class Test1 {
     public static void main(String[] args) {
         Test1 test1=new Test1();
 
         test1.testHeap();
+
     }
 
     //堆溢出  循环创建对象
