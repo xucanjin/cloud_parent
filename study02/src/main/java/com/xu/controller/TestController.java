@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author canjin
- * @date 2021/11/01
+ * @date 2021/12/26
  * @description
  */
 @RestController
@@ -37,6 +37,7 @@ public class TestController {
     @RequestMapping("cache2")
     public String cache2() {
         String s = JSONUtil.toJsonStr(CacheUtil.LIST);
+        System.out.println("222");
         return s;
     }
 }

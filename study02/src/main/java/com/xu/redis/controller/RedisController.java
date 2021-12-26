@@ -1,7 +1,9 @@
 package com.xu.redis.controller;
 
+import cn.hutool.core.util.StrUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
+import org.redisson.api.RReadWriteLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,5 +60,41 @@ public class RedisController {
             lock.unlock();
         }
 
+    }
+
+    /**
+     * 读锁demo
+     */
+    public void searchData(){
+        RReadWriteLock readWriteLock = redisson.getReadWriteLock(KEY);
+        //读锁
+        RLock rLock = readWriteLock.readLock();
+        rLock.lock();
+
+        System.out.println("获取读锁成功");
+
+        String stock = stringRedisTemplate.opsForValue().get("stock");
+        if(StrUtil.isNotEmpty(stock)){
+            stringRedisTemplate.opsForValue().set("stock","10");
+
+        }
+        //释放锁
+        rLock.unlock();
+    }
+
+
+    /**
+     * 写锁demo
+     */
+    public void update(){
+        RReadWriteLock readWriteLock = redisson.getReadWriteLock(KEY);
+        RLock writeLock = readWriteLock.writeLock();
+
+        //加锁
+        writeLock.lock();
+        System.out.println("获取写锁成功");
+        stringRedisTemplate.delete("stock");
+        //释放锁
+        writeLock.unlock();
     }
 }
