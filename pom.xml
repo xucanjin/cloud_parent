@@ -21,6 +21,7 @@
         <module>kafka_consumer</module>
         <module>nginx01</module>
         <module>study02</module>
+        <module>study03</module>
     </modules>
 
     <parent>
