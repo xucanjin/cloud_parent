@@ -62,3 +62,5 @@ upstream canjin{
         }
     }
 访问localhost/get即访问http://127.0.0.1:8087/get
+
+--2022.11.19 study03 切面配置

@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @author xucanjin
  * @date 2022/11/19
  * @description 记录订单id的切面
+ * 配置切面必须添加@Aspect和@Component注解
  */
 
 @Aspect
@@ -23,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 public class OperateAspect {
 
     /**
-     * 定义切入点
-     * 横切逻辑
+     * 1、先定义切入点
+     * 2. 再定义横切逻辑
      */
     @Pointcut("@annotation(com.xu.annotation.RecordOperate)")
     public void pointCut() {
