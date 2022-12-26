@@ -32,6 +32,7 @@ public class Code01_FindFirstIntersectNode {
 			return null;
 		}
 		// n1 慢  n2 快
+		// 慢指针一次走一步 快指针一次2步
 		Node slow = head.next; // n1 -> slow
 		Node fast = head.next.next; // n2 -> fast
 		while (slow != fast) {
@@ -42,6 +43,7 @@ public class Code01_FindFirstIntersectNode {
 			slow = slow.next;
 		}
 		// slow fast  相遇
+		// 确定有环，快指针回到开始位置
 		fast = head; // n2 -> walk again from head
 		while (slow != fast) {
 			slow = slow.next;

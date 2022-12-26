@@ -5,6 +5,31 @@ import java.util.List;
 
 public class Code04_PrintAllPermutations {
 
+
+	public static List<String> permutation(String s) {
+		List<String> ans = new ArrayList<>();
+		if (s == null || s.length() == 0) {
+			return ans;
+		}
+		char[] str = s.toCharArray();
+		process(str, 0, ans);
+		return ans;
+	}
+
+	private static void process(char[] str, int i, List<String> ans) {
+		if (i == str.length) {
+			ans.add(String.valueOf(str));
+			return;
+		}
+		for (int j = i; j < str.length; j++) {
+			// 将i 和j位置的字符交换
+			swap(str, i, j);
+			process(str, i + 1, ans);
+			// 恢复现场，把i和j位置的字符换回来
+			swap(str, j, i);
+		}
+	}
+
 	public static List<String> permutation1(String s) {
 		List<String> ans = new ArrayList<>();
 		if (s == null || s.length() == 0) {

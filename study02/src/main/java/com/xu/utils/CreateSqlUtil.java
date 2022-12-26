@@ -7,6 +7,7 @@ import cn.hutool.poi.excel.ExcelUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,17 +19,19 @@ import java.util.TreeMap;
  */
 public class CreateSqlUtil {
 
+    private static Map<String, Map<String, String>> TAG_MAP = new TreeMap<>();
+
     public static void main(String[] args) {
 
         Map<String, List<IsoConfig>> map = read("C:\\Users\\admin\\Desktop\\中投swift升级\\excel");
 
-        writeFile(map, "C:\\Users\\admin\\Desktop\\sql\\validation2.sql");
+        writeFile(map, "C:\\Users\\admin\\Desktop\\sql\\validation4.sql");
     }
 
     private static Map<String, String> nameMap = new TreeMap<>();
 
     static {
-       //230570010 camt.057.001
+        //230570010 camt.057.001
         //230560010 camt.056.001	CBPRPlus_ISO_20022_Portfolio_November_2022_Release_CBPRPlus-camt_056_001_08_FIToFIPaymentCancellationRequest
         //230540010 camt.054.001	CBPRPlus_ISO_20022_Portfolio_November_2022_Release_CBPRPlus-camt_054_001_08_BankToCustomerDebitCreditNotification
         //230530010 camt.053.001	CBPRPlus_ISO_20022_Portfolio_November_2022_Release_CBPRPlus-camt_053_001_08_BankToCustomerStatement
@@ -60,6 +63,25 @@ public class CreateSqlUtil {
         nameMap.put("230570010", "CBPRPlus_ISO_20022_Portfolio_November_2022_Release_CBPRPlus-camt_057_001_06_NotificationToReceive");
         //230600010 camt.060.001
         nameMap.put("230600010", "CBPRPlus_ISO_20022_Portfolio_November_2022_Release_CBPRPlus-camt_060_001_05_AccountReportingRequest");
+
+
+        TAG_MAP.put("210010010", new HashMap<String, String>());
+        TAG_MAP.put("220020010", new HashMap<String, String>());
+        TAG_MAP.put("220040010", new HashMap<String, String>());
+        TAG_MAP.put("220080010", new HashMap<String, String>());
+        TAG_MAP.put("220080011", new HashMap<String, String>());
+        TAG_MAP.put("220090010", new HashMap<String, String>());
+        TAG_MAP.put("220090011", new HashMap<String, String>());
+        TAG_MAP.put("220090012", new HashMap<String, String>());
+        TAG_MAP.put("220100010", new HashMap<String, String>());
+        TAG_MAP.put("230290010", new HashMap<String, String>());
+        TAG_MAP.put("230520010", new HashMap<String, String>());
+        TAG_MAP.put("230530010", new HashMap<String, String>());
+        TAG_MAP.put("230540010", new HashMap<String, String>());
+        TAG_MAP.put("230560010", new HashMap<String, String>());
+        TAG_MAP.put("230570010", new HashMap<String, String>());
+        //230600010 camt.060.001
+        TAG_MAP.put("230600010", new HashMap<String, String>());
 
     }
 
@@ -97,6 +119,22 @@ public class CreateSqlUtil {
                     String tagPath;
                     List<IsoConfig> list = new ArrayList<>();
                     for (List<Object> objects : read) {
+                        //读取某行第4列数据
+                        String key = (String) objects.get(3);
+                        String value = (String) objects.get(2);
+                        if (StrUtil.isNotEmpty(key)) {
+                            key = key.replace("<", "").replace(">", "");
+                            if (!TAG_MAP.get(msgType).containsKey(key)) {
+                                if (value.length() > 1) {
+                                    value = value.replaceAll(" ", "");
+                                    if (value.contains("(")) {
+                                        value = value.substring(0, value.indexOf("("));
+                                    }
+                                }
+                                TAG_MAP.get(msgType).put(key, value);
+                            }
+                        }
+
                         //读取第21列数据
                         tagPath = (String) objects.get(20);
                         if (StrUtil.isEmpty(tagPath) || tagPath.startsWith("/AppHdr")) {
@@ -108,7 +146,7 @@ public class CreateSqlUtil {
                         minMand = (String) objects.get(17);
                         if (("Choice".equals(type) || "".equals(type)) && "Yes".equals(minMand)) {
                             if (tagPath.endsWith("GrpHdr") || tagPath.endsWith("Assgnmt") || tagPath.endsWith("TxInf")
-                            || tagPath.endsWith("PmtInf") || tagPath.endsWith("CdtTrfTxInf") || tagPath.endsWith("Stmt")
+                                    || tagPath.endsWith("PmtInf") || tagPath.endsWith("CdtTrfTxInf") || tagPath.endsWith("Stmt")
                                     || tagPath.endsWith("Ntfctn")) {
                                 continue;
                             }
@@ -125,6 +163,15 @@ public class CreateSqlUtil {
         return map;
     }
 
+
+    private static final String ERROR_CODE = "CBPR_Element_Mandatory_FormalRule";
+    private static final String ERROR_TYPE = "The following element is mandatory.";
+
+    private static final String DESC1 = "Each element [Full Message";
+    private static final String DESC2 = "] must be present.";
+
+    private static final String SQL_1 = "INSERT INTO SMS_FIN_ERROR_CODE_DESCRIPTION (ERROR_CODE_DESCRIPTION_ID, ERROR_CODE_ID,ERROR_CODE_TYPE_ID,DESCRIPTION,MESSAGE_TYPE_ID,VALIDATION_CODE) VALUES";
+
     /**
      * 将生成的sql写入文件中
      *
@@ -136,23 +183,59 @@ public class CreateSqlUtil {
             FileUtil.del(new File(path2));
         }
         List<String> list = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
+        List<String> descList = new ArrayList<>();
+        int descId = 1785;
+
         for (Map.Entry<String, List<IsoConfig>> entry : map.entrySet()) {
             Integer num = 1;
             Integer msgType = Integer.valueOf(entry.getKey());
             for (IsoConfig config : entry.getValue()) {
                 String idStr = entry.getKey() + String.format("%03d", num);
-                String sql = "INSERT INTO SMS_validation VALUES (" + idStr + ", 0, '/" + config.getPath() + "', NULL, '1', NULL, NULL, '1', 'Blank', 'False', null, 'C25', 'C1', 1054, 0, '1', " + msgType + ");";
+                idList.add(idStr);
+                String violationCode = "M" + num;
+                String sql = "INSERT INTO SMS_validation VALUES (" + idStr + ", 0, '/" + config.getPath() + "', NULL, '1', NULL, NULL, '1', 'Blank', 'False', null, '" + ERROR_CODE + "', '" + violationCode + "', 1780, 0, '1', " + msgType + ");";
+
+                String descSql = SQL_1 + "(" + descId + ", 1780, 1023, '" + getDesc(config.getPath(), TAG_MAP.get(entry.getKey())) + "', " + msgType + ", '" + violationCode + "');";
                 if (num == 1) {
                     list.add("");
                     list.add("--" + msgType);
+                    descList.add("");
+                    descList.add("--" + msgType);
                 }
+                descList.add(descSql);
                 list.add(sql);
                 num++;
+                descId++;
             }
         }
+        StringBuilder builder = new StringBuilder("delete from SMS_validation where validation_id in(");
+        for (String s : idList) {
+            builder.append(s).append(",");
+        }
+        builder.append(")");
+        //descList.add(builder.toString());
         File newFile = new File(path2);
         // 写入文件
         FileUtil.appendUtf8Lines(list, newFile);
+        FileUtil.appendUtf8Lines(descList, newFile);
         System.out.println("写入成功！");
+    }
+
+    private static String getDesc(String path, Map<String, String> map) {
+        StringBuilder builder = new StringBuilder(DESC1);
+        int num = 0;
+        for (String s : path.split("/")) {
+            if (num > 0) {
+                if (num == 1) {
+                    builder.append("/").append(s);
+                } else {
+                    builder.append("/").append(map.get(s));
+                }
+            }
+            num++;
+        }
+        builder.append(DESC2);
+        return builder.toString();
     }
 }

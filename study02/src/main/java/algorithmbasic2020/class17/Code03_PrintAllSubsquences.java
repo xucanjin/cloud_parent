@@ -32,6 +32,11 @@ public class Code03_PrintAllSubsquences {
 		process1(str, index + 1, ans, path + String.valueOf(str[index]));
 	}
 
+	/**
+	 * 打印一个字符串的全部子序列，不出现重复字面值的子序列
+	 * @param s
+	 * @return
+	 */
 	public static List<String> subsNoRepeat(String s) {
 		char[] str = s.toCharArray();
 		String path = "";
