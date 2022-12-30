@@ -9,7 +9,7 @@ public class DPProblem1 {
 
     public static void main(String[] args) {
 
-        minCostClimbingStairs(new int[]{10, 15, 20});
+        //minCostClimbingStairs(new int[]{10, 15, 20});
         //minCostClimbingStairs(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1});
 
         //uniquePaths(3,7);
@@ -22,6 +22,7 @@ public class DPProblem1 {
         // 最大容量
         int bagSize = 4;
         testWeightBagProblem(weight, value, bagSize);
+        testWeightBagProblem2(weight, value, bagSize);
     }
 
     /**
@@ -175,4 +176,30 @@ public class DPProblem1 {
 
         System.out.println(dp[goods-1][bagSize]);
     }
+
+    /**
+     * 01背包 一维数组实现
+     * @param weight
+     * @param value
+     * @param bagWeight
+     */
+    public static void testWeightBagProblem2(int[] weight, int[] value, int bagWeight) {
+
+        //定义dp数组：dp[j]表示背包容量为j时，能获得的最大价值
+        int[] dp = new int[bagWeight+1];
+
+        dp[0] = 0;
+
+        // 先遍历物品，再遍历背包
+        for (int i = 0; i < weight.length; i++) {
+            // 倒序遍历背包容量
+            for (int j = bagWeight; j >= weight[i]; j--) {
+                // dp[j]:表示不放物品i的最大价值
+                // dp[j - weight[i]] + value[i] 表示 容量为 j - 物品i重量 的背包 加上 物品i的价值。
+                dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+            }
+        }
+        System.out.println(dp[bagWeight]);
+    }
+
 }
