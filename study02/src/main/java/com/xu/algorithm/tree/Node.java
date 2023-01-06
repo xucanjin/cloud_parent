@@ -7,13 +7,13 @@ package com.xu.algorithm.tree;
  */
 public class Node {
 
-    int  value;
+    public int  value;
     /**
      * 左子树
      */
-    Node left;
+    public Node left;
     /**
      * 右子树
      */
-    Node right;
+    public Node right;
 }
