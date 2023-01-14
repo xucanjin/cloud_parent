@@ -42,6 +42,7 @@ public class DPProblem3 {
         // dp[j]：凑成总金额j的货币组合数
         int[] dp = new int[amount + 1];
 
+        // 首先dp[0]一定要为1，dp[0] = 1是 递归公式的基础。如果dp[0]=0的话，后面所有推导出来的值都是0了。
         dp[0] = 1;
 
 
@@ -107,7 +108,7 @@ public class DPProblem3 {
      */
     public static int numSquares(int n) {
         int max = Integer.MAX_VALUE;
-
+        // dp[j]：和为j的完全平方数的最少数量
         int[] dp = new int[n + 1];
         for (int i = 0; i < dp.length; i++) {
             dp[i] = max;
@@ -152,6 +153,7 @@ public class DPProblem3 {
     public static boolean wordBreak(String s, List<String> wordDict) {
         HashSet<String> set = new HashSet<>(wordDict);
 
+        // 字符串长度为i的话，dp[i]为true，表示可以拆分为一个或多个在字典中出现的单词
         boolean[] dp = new boolean[s.length()+1];
 
         dp[0] = true;

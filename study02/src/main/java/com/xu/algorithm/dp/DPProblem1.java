@@ -193,6 +193,7 @@ public class DPProblem1 {
         // 先遍历物品，再遍历背包
         for (int i = 0; i < weight.length; i++) {
             // 倒序遍历背包容量
+            // 倒序遍历是为了保证物品i只被放入一次！。但如果一旦正序遍历了，那么物品0就会被重复加入多次！
             for (int j = bagWeight; j >= weight[i]; j--) {
                 // dp[j]:表示不放物品i的最大价值
                 // dp[j - weight[i]] + value[i] 表示 容量为 j - 物品i重量 的背包 加上 物品i的价值。
