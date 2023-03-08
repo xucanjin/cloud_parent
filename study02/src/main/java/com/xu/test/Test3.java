@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class Test3 {
     public static void main(String[] args) {
 
-        createSql("C:\\Users\\admin\\Desktop\\核心机构信息2.xlsx");
+        createSql("C:\\Users\\92780\\Desktop\\桌面文件\\9998下机构信息.xlsx");
         //createOrgSql("C:\\Users\\admin\\Desktop\\机构数据(1).xls","C:\\Users\\admin\\Desktop\\核心机构信息2.xlsx");
         //create2("C:\\Users\\admin\\Desktop\\机构数据(1).xls");
         /*System.out.println(crypt2("5400_01", "a666666"));
