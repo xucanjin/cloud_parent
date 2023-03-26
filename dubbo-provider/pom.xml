@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dubbo_consumer</artifactId>
-
+    <artifactId>dubbo-provider</artifactId>
 
     <dependencies>
         <!--dubbo-->
@@ -25,5 +24,12 @@
             <artifactId>curator-recipes</artifactId>
             <version>2.9.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.xu</groupId>
+            <artifactId>dubbo-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
+
 </project>

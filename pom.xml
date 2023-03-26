@@ -23,6 +23,8 @@
         <module>study02</module>
         <module>study03</module>
         <module>sentinel01</module>
+        <module>dubbo-provider</module>
+        <module>dubbo-interface</module>
     </modules>
 
     <parent>
